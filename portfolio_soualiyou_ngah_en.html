@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soualiyou NGAH - Data Analyst & Scientist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f3ee;
+  --surface: #ffffff;
+  --ink: #111111;
+  --ink-soft: #555555;
+  --accent: #1a56db;
+  --accent-warm: #e84c3d;
+  --accent-teal: #0d9488;
+  --border: #e2ddd5;
+  --tag-bg: #edf2ff;
+  --tag-color: #1a56db;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(245,243,238,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  color: var(--ink); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--ink-soft); text-decoration: none;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 7rem 3rem 4rem;
+  gap: 4rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.hero-left { animation: fadeUp 0.7s ease both; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--tag-bg); color: var(--tag-color);
+  padding: 0.35rem 0.9rem; border-radius: 999px;
+  font-size: 0.74rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.dot-live {
+  width: 7px; height: 7px;
+  background: var(--accent); border-radius: 50%;
+  animation: pulse 1.6s infinite;
+}
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 800; line-height: 1.06;
+  letter-spacing: -0.03em; margin-bottom: 1.2rem;
+}
+.hero h1 span { color: var(--accent); }
+.hero-desc {
+  font-size: 1rem; color: var(--ink-soft);
+  max-width: 480px; margin-bottom: 2rem;
+  font-weight: 300; line-height: 1.75;
+}
+.hero-meta { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+.meta-chip {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.82rem; color: var(--ink-soft);
+}
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.72rem 1.5rem; border-radius: 8px;
+  font-size: 0.88rem; font-weight: 500;
+  text-decoration: none; cursor: pointer;
+  border: none; transition: all 0.2s; font-family: inherit;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #1447c4; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(26,86,219,0.25); }
+.btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+.btn-outline:hover { border-color: var(--ink); background: var(--ink); color: #fff; }
+
+.hero-right { animation: fadeUp 0.7s 0.15s ease both; display: flex; flex-direction: column; gap: 1rem; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.stat-card {
+  background: var(--surface); border-radius: 14px;
+  padding: 1.3rem 1.5rem; border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.07); }
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.9rem; font-weight: 800;
+  color: var(--accent); line-height: 1; margin-bottom: 0.25rem;
+}
+.stat-label { font-size: 0.78rem; color: var(--ink-soft); }
+.skills-strip {
+  background: var(--surface); border-radius: 14px;
+  padding: 1.2rem 1.5rem; border: 1px solid var(--border);
+}
+.strip-title {
+  font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 0.09em; color: var(--ink-soft);
+  margin-bottom: 0.75rem; font-weight: 600;
+}
+.pill-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.pill {
+  font-size: 0.76rem; padding: 0.26rem 0.68rem;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 999px; color: var(--ink); font-weight: 500;
+}
+
+section { max-width: 1200px; margin: 0 auto; padding: 5rem 3rem; }
+.section-label {
+  font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent);
+  font-weight: 700; margin-bottom: 0.4rem;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem;
+}
+.section-sub {
+  color: var(--ink-soft); max-width: 520px;
+  font-size: 0.93rem; margin-bottom: 2.8rem; line-height: 1.7;
+}
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 0 3rem; }
+
+.exp-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+.exp-card {
+  display: grid; grid-template-columns: 140px 1fr; gap: 0 2rem;
+  background: var(--surface); border-radius: 14px;
+  padding: 1.7rem 2rem; border: 1px solid var(--border);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.exp-card:hover { box-shadow: 0 8px 26px rgba(0,0,0,0.06); transform: translateY(-2px); }
+.exp-date {
+  font-size: 0.77rem; color: var(--ink-soft);
+  font-weight: 500; padding-top: 0.2rem; line-height: 1.5;
+}
+.exp-date small { display: block; color: var(--accent-teal); font-weight: 600; margin-top: 0.2rem; }
+.exp-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.97rem; font-weight: 700; margin-bottom: 0.15rem;
+}
+.exp-org { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-bottom: 0.8rem; }
+.exp-list { padding-left: 1rem; }
+.exp-list li { font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 0.35rem; line-height: 1.55; }
+.exp-list li::marker { color: var(--accent); }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+.exp-tag {
+  font-size: 0.7rem; padding: 0.2rem 0.58rem;
+  background: var(--tag-bg); color: var(--tag-color);
+  border-radius: 999px; font-weight: 600;
+}
+
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.4rem; }
+.project-card {
+  background: var(--surface); border-radius: 14px;
+  border: 1px solid var(--border); overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.project-card:hover { box-shadow: 0 10px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
+.project-header {
+  padding: 1.4rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 1rem;
+}
+.project-icon {
+  width: 42px; height: 42px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; flex-shrink: 0;
+}
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.93rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.project-body { padding: 1rem 1.5rem 1.3rem; }
+.project-desc { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 1rem; }
+.project-footer { display: flex; justify-content: space-between; align-items: center; }
+.project-link {
+  font-size: 0.79rem; color: var(--accent);
+  text-decoration: none; font-weight: 600;
+}
+.project-link:hover { text-decoration: underline; }
+
+.skills-section { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 1.4rem; }
+.skill-group {
+  background: var(--surface); border-radius: 14px;
+  padding: 1.5rem 1.6rem; border: 1px solid var(--border);
+}
+.skill-group-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.84rem; font-weight: 700;
+  margin-bottom: 1rem;
+}
+.skill-item { margin-bottom: 0.75rem; }
+.skill-row { display: flex; justify-content: space-between; margin-bottom: 0.28rem; }
+.skill-name { font-size: 0.82rem; font-weight: 500; }
+.skill-pct { font-size: 0.73rem; color: var(--ink-soft); }
+.skill-bar { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.skill-fill {
+  height: 100%; border-radius: 99px; background: var(--accent);
+  transition: width 1.1s ease;
+}
+
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.4rem; }
+.edu-card {
+  background: var(--surface); border-radius: 14px;
+  padding: 1.6rem 1.7rem; border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.edu-card:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.06); transform: translateY(-2px); }
+.edu-degree {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.94rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.edu-school { font-size: 0.81rem; color: var(--accent); font-weight: 600; margin-bottom: 0.45rem; }
+.edu-period { font-size: 0.76rem; color: var(--ink-soft); }
+.edu-desc { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.6rem; line-height: 1.55; }
+
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(275px, 1fr)); gap: 1rem; }
+.cert-card {
+  background: var(--surface); border-radius: 13px;
+  padding: 1.2rem 1.4rem; border: 1px solid var(--border);
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  transition: box-shadow 0.2s, transform 0.2s;
+  text-decoration: none; color: inherit;
+}
+.cert-card:hover { box-shadow: 0 7px 22px rgba(0,0,0,0.07); transform: translateY(-2px); }
+.cert-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.cert-title { font-size: 0.84rem; font-weight: 600; margin-bottom: 0.2rem; line-height: 1.35; }
+.cert-org { font-size: 0.73rem; color: var(--ink-soft); }
+.cert-verify { font-size: 0.7rem; color: var(--accent); font-weight: 600; margin-top: 0.3rem; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.contact-info { display: flex; flex-direction: column; gap: 0.9rem; }
+.contact-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.88rem; color: var(--ink-soft);
+}
+.contact-item a { color: var(--ink); text-decoration: none; font-weight: 500; }
+.contact-item a:hover { color: var(--accent); }
+.contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-group label {
+  font-size: 0.76rem; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft);
+}
+.form-group input, .form-group textarea {
+  padding: 0.72rem 0.95rem;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  background: var(--bg); font-family: inherit;
+  font-size: 0.88rem; color: var(--ink);
+  outline: none; transition: border-color 0.2s; resize: vertical;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+
+footer {
+  text-align: center; padding: 2.5rem 3rem;
+  font-size: 0.78rem; color: var(--ink-soft);
+  border-top: 1px solid var(--border);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.65); }
+}
+.fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  nav { padding: 0.9rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 5.5rem 1.5rem 3rem; gap: 2.5rem; }
+  section { padding: 3.5rem 1.5rem; }
+  .exp-card { grid-template-columns: 1fr; gap: 0.5rem 0; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  hr.divider { margin: 0 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">SN.</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="about" style="padding-top:0; padding-bottom:0;">
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">
+      <span class="dot-live"></span>
+      Open to work-study, September 2026
+    </div>
+    <h1>Soualiyou<br><span>NGAH</span></h1>
+    <p class="hero-desc">
+      Data Analyst and Data Scientist passionate about turning data into concrete decisions. Specialized in data visualization, predictive modeling, machine learning and AI projects, with hands-on experience in scientific research, public sector and media.
+    </p>
+    <div class="hero-meta">
+      <span class="meta-chip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        France
+      </span>
+      <span class="meta-chip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        ESIEA Paris, AI &amp; Data Science Engineering
+      </span>
+      <span class="meta-chip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        2 weeks on / 2 weeks off, 24 months
+      </span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">Get in touch</a>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/soualiyou-ngah/" target="_blank">LinkedIn</a>
+      <a class="btn btn-outline" href="https://github.com/Papyrus523" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Professional experiences</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Certifications earned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Degrees &amp; Masters</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Languages spoken</div>
+      </div>
+    </div>
+    <div class="skills-strip">
+      <div class="strip-title">Core stack</div>
+      <div class="pill-row">
+        <span class="pill">Python</span>
+        <span class="pill">R</span>
+        <span class="pill">SQL</span>
+        <span class="pill">Excel</span>
+        <span class="pill">Machine Learning</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">Pandas</span>
+        <span class="pill">Scikit-learn</span>
+        <span class="pill">NumPy</span>
+        <span class="pill">Matplotlib</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="divider">
+
+<section id="experience" class="fade-in">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">Professional Experience</h2>
+  <p class="section-sub">Scientific research, public sector, media: diverse environments that shaped a cross-functional approach to data.</p>
+
+  <div class="exp-grid">
+
+    <div class="exp-card">
+      <div class="exp-date">
+        Jan 2026 - Jul 2026
+        <small>6 months</small>
+      </div>
+      <div>
+        <div class="exp-title">Data Analyst, Predictive Modeling &amp; Simulation (Internship)</div>
+        <div class="exp-org">Centre for Functional and Evolutionary Ecology (CEFE), Montpellier</div>
+        <ul class="exp-list">
+          <li>Social Network Analysis (SNA): modeled complex interactions between individuals using graph theory to map social structure and identify pivot individuals through centrality metrics.</li>
+          <li>Predictive modeling via agent-based simulation to quantify the impact of epidemic scenarios on long-term population viability.</li>
+          <li>Designed dynamic visualizations translating complex biological dynamics into actionable conservation indicators for decision-makers.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">Visualization</span>
+          <span class="exp-tag">SNA / Graph Theory</span>
+          <span class="exp-tag">Modeling</span>
+          <span class="exp-tag">DataViz</span>
+          <span class="exp-tag">R</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-date">
+        May 2024 - Aug 2024
+        <small>3 months</small>
+      </div>
+      <div>
+        <div class="exp-title">Data Analyst (Internship)</div>
+        <div class="exp-org">Ministry of Commerce, Cameroon</div>
+        <ul class="exp-list">
+          <li>Built an Excel tool automating measurement uncertainty calculations using the GUM standard, reducing human error and processing time for calibrations.</li>
+          <li>Developed a price prediction model to anticipate market fluctuations for fast-moving consumer goods.</li>
+          <li>Visualized gaps between government price standards and field market prices to identify priority control zones.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Advanced Excel</span>
+          <span class="exp-tag">Predictive Analytics</span>
+          <span class="exp-tag">Statistics</span>
+          <span class="exp-tag">Reporting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-date">
+        Feb 2023 - Jun 2023
+        <small>4 months</small>
+      </div>
+      <div>
+        <div class="exp-title">Data Scientist (Internship)</div>
+        <div class="exp-org">Cameroon Radio Television (CRTV), Cameroon</div>
+        <ul class="exp-list">
+          <li>Analyzed and structured audience and TV program databases.</li>
+          <li>Cleaned and explored data using Python (Pandas, NumPy).</li>
+          <li>Developed Python scripts to automate recurring analyses.</li>
+          <li>Wrote analytical reports for business teams.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">Pandas</span>
+          <span class="exp-tag">NumPy</span>
+          <span class="exp-tag">Exploratory Analysis</span>
+          <span class="exp-tag">Automation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-date">
+        Jan 2023 - Feb 2023
+        <small>1 month</small>
+      </div>
+      <div>
+        <div class="exp-title">Data Analyst</div>
+        <div class="exp-org">Koree Africa, Cameroon</div>
+        <ul class="exp-list">
+          <li>Leveraged Excel to track business activity and sales performance.</li>
+          <li>Analyzed sales data and customer behavior.</li>
+          <li>Built dashboards and visualizations to monitor sales KPIs.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Excel</span>
+          <span class="exp-tag">Dashboard</span>
+          <span class="exp-tag">Reporting</span>
+          <span class="exp-tag">Sales Analysis</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="projects" class="fade-in">
+  <div class="section-label">GitHub</div>
+  <h2 class="section-title">Data &amp; AI Projects</h2>
+  <p class="section-sub">A selection of Python projects covering prediction, classification, computer vision and exploratory analysis. Full source code available on GitHub.</p>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:#eef2ff;">&#129504;</div>
+        <div>
+          <div class="project-title">Image Recognition</div>
+          <div class="pill-row" style="margin-top:0.3rem;">
+            <span class="pill">Deep Learning</span>
+            <span class="pill">Computer Vision</span>
+            <span class="pill">Reporting</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Built a convolutional neural network to classify images automatically. Designed a model capable of identifying animal species from camera trap photos, covering the full AI pipeline from data preprocessing to reliable prediction deployment.</p>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Papyrus523/Data-Projects" target="_blank">View code &rarr;</a>
+          <span class="pill">Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:#f0fdf4;">&#128200;</div>
+        <div>
+          <div class="project-title">Predictive Models</div>
+          <div class="pill-row" style="margin-top:0.3rem;">
+            <span class="pill">ML</span>
+            <span class="pill">Scikit-learn</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Developed predictive models (regression, classification) with full preprocessing pipelines, feature engineering and rigorous performance evaluation using cross-validation.</p>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Papyrus523/Data-Projects" target="_blank">View code &rarr;</a>
+          <span class="pill">Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:#fff7ed;">&#128269;</div>
+        <div>
+          <div class="project-title">Exploratory Data Analysis</div>
+          <div class="pill-row" style="margin-top:0.3rem;">
+            <span class="pill">EDA</span>
+            <span class="pill">Visualization</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Explored, cleaned and visualized complex datasets using Pandas, Matplotlib and Seaborn. Extracted actionable insights and communicated findings through data storytelling.</p>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Papyrus523/Data-Projects" target="_blank">View code &rarr;</a>
+          <span class="pill">Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:#fdf2f8;">&#128375;</div>
+        <div>
+          <div class="project-title">Social Network Analysis (SNA)</div>
+          <div class="pill-row" style="margin-top:0.3rem;">
+            <span class="pill">Statistical Modeling</span>
+            <span class="pill">Graph Theory</span>
+            <span class="pill">Model Validation</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Modeled individual interactions using graph theory. Computed centrality metrics to identify pivot nodes within a social network.</p>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Papyrus523/Data-Projects" target="_blank">View code &rarr;</a>
+          <span class="pill">Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:#f0f9ff;">&#129440;</div>
+        <div>
+          <div class="project-title">Individual-Based Simulation (IBM)</div>
+          <div class="pill-row" style="margin-top:0.3rem;">
+            <span class="pill">OOP Modeling</span>
+            <span class="pill">Visualization</span>
+            <span class="pill">A/B Testing</span>
+            <span class="pill">Reporting</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Simulation model to quantify the impact of epidemic scenarios on the long-term viability of an animal population. Developed during the CEFE Montpellier internship.</p>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Papyrus523/Data-Projects" target="_blank">View code &rarr;</a>
+          <span class="pill">Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" style="border: 2px dashed var(--border); background: var(--bg); display:flex; align-items:center; justify-content:center; min-height:200px;">
+      <div style="text-align:center; padding:2rem;">
+        <div style="font-size:1.8rem; margin-bottom:0.8rem;">+</div>
+        <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.88rem; margin-bottom:0.5rem;">More projects on GitHub</div>
+        <a class="project-link" href="https://github.com/Papyrus523/Data-Projects" target="_blank" style="justify-content:center; display:flex;">View all projects &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="skills" class="fade-in">
+  <div class="section-label">Expertise</div>
+  <h2 class="section-title">Technical Skills</h2>
+  <p class="section-sub">A complete Data Science stack, from data collection and modeling through to visualization and deployment.</p>
+
+  <div class="skills-section">
+
+    <div class="skill-group">
+      <div class="skill-group-title">Programming Languages</div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Python</span><span class="skill-pct">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="72%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">R</span><span class="skill-pct">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">SQL</span><span class="skill-pct">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="82%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Matlab</span><span class="skill-pct">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="60%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">C</span><span class="skill-pct">Basics</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="38%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Data Science &amp; Machine Learning</div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Machine Learning</span><span class="skill-pct">Proficient</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="76%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Predictive Modeling</span><span class="skill-pct">Proficient</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Deep Learning / CNN</span><span class="skill-pct">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="60%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Statistics</span><span class="skill-pct">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Artificial Intelligence</span><span class="skill-pct">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Tools &amp; Visualization</div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Power BI / Tableau</span><span class="skill-pct">Operational</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="70%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Excel / Office 365</span><span class="skill-pct">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="82%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Pandas / NumPy</span><span class="skill-pct">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Matplotlib / Seaborn</span><span class="skill-pct">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Scikit-learn</span><span class="skill-pct">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="68%"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="education" class="fade-in">
+  <div class="section-label">Academic</div>
+  <h2 class="section-title">Education</h2>
+  <p class="section-sub">A strong academic background in applied mathematics, statistics and AI engineering.</p>
+
+  <div class="edu-grid">
+    <div class="edu-card" style="border-left-color: var(--accent);">
+      <div class="edu-degree">Engineering Degree in AI &amp; Data Science</div>
+      <div class="edu-school">ESIEA, Ecole Superieure d'Informatique Electronique et Automatique, Paris</div>
+      <div class="edu-period">2026 - 2028, In progress</div>
+      <div class="edu-desc">Engineering program specialized in AI, machine learning, deep learning and data engineering. Combines a strong theoretical foundation with hands-on model development to translate business needs into insights and support decision-making.</div>
+    </div>
+    <div class="edu-card" style="border-left-color: var(--accent-teal);">
+      <div class="edu-degree">Master's in Mathematical Modeling &amp; Scientific Computing</div>
+      <div class="edu-school">Ecole Nationale Superieure Polytechnique de Yaounde, Cameroon</div>
+      <div class="edu-period">2023 - 2025</div>
+      <div class="edu-desc">Applied mathematical modeling, numerical simulation and data analysis. Thesis focused on modeling and strategy optimization.</div>
+    </div>
+    <div class="edu-card" style="border-left-color: var(--accent-warm);">
+      <div class="edu-degree">Master's in Probability &amp; Statistics</div>
+      <div class="edu-school">University of Yaounde I, Cameroon</div>
+      <div class="edu-period">2022</div>
+      <div class="edu-desc">Theoretical foundations in probability, inferential statistics and numerical methods for turning raw data into performance indicators and strategic decision-making tools.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="certifications" class="fade-in">
+  <div class="section-label">Certifications</div>
+  <h2 class="section-title">Credentials &amp; Certifications</h2>
+  <p class="section-sub">Certifications earned from recognized institutions: Kaggle, IBM and WorldQuant University.</p>
+
+  <div class="certs-grid">
+
+    <a class="cert-card" href="https://www.kaggle.com/learn/certification/soualiyoungahnsangou/advanced-sql" target="_blank">
+      <div class="cert-icon" style="background:#20beff22;">&#128202;</div>
+      <div>
+        <div class="cert-title">Advanced SQL</div>
+        <div class="cert-org">Kaggle</div>
+        <div class="cert-verify">View certificate &rarr;</div>
+      </div>
+    </a>
+
+    <a class="cert-card" href="https://www.credly.com/badges/4867b63c-09c7-4321-88a9-d303ee0b836b/public_url" target="_blank">
+      <div class="cert-icon" style="background:#0062ff22;">&#128013;</div>
+      <div>
+        <div class="cert-title">Python for Data Science and AI</div>
+        <div class="cert-org">IBM Developer Skills Network</div>
+        <div class="cert-verify">View badge &rarr;</div>
+      </div>
+    </a>
+
+    <a class="cert-card" href="https://www.credly.com/badges/f97aa67a-aeb9-4a91-8a15-bcd867bea4a1/public_url" target="_blank">
+      <div class="cert-icon" style="background:#7c3aed22;">&#128300;</div>
+      <div>
+        <div class="cert-title">Applied Data Science Lab</div>
+        <div class="cert-org">WorldQuant University</div>
+        <div class="cert-verify">View badge &rarr;</div>
+      </div>
+    </a>
+
+    <a class="cert-card" href="https://www.credly.com/badges/052d845e-0a4e-4696-b07a-57f08cfc9c7b/public_url" target="_blank">
+      <div class="cert-icon" style="background:#16a34a22;">&#128203;</div>
+      <div>
+        <div class="cert-title">Project Management Essentials</div>
+        <div class="cert-org">IBM / Coursera</div>
+        <div class="cert-verify">View badge &rarr;</div>
+      </div>
+    </a>
+
+    <div class="cert-card" style="cursor:default;">
+      <div class="cert-icon" style="background:#f59e0b22;">&#128202;</div>
+      <div>
+        <div class="cert-title">Data Analyst</div>
+        <div class="cert-org">TechWomen Factory Program, CAYSTI / CUSO</div>
+        <div class="cert-verify" style="color:var(--ink-soft);">April 2022 - January 2023</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="contact" class="fade-in">
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Let's work together</h2>
+  <p class="section-sub">Available for a work-study contract from September 2026. Feel free to reach out for any opportunity in data, business analytics or AI projects.</p>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem; margin-bottom:0.3rem;">Soualiyou NGAH</div>
+      <div style="color:var(--ink-soft); font-size:0.88rem; margin-bottom:1.2rem;">Data Analyst / Data Scientist / AI Projects</div>
+
+      <div class="contact-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:nnsoualiyou@yahoo.com">nnsoualiyou@yahoo.com</a>
+      </div>
+      <div class="contact-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.82 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:+33759175511">+33 7 59 17 55 11</a>
+      </div>
+      <div class="contact-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://www.linkedin.com/in/soualiyou-ngah/" target="_blank">linkedin.com/in/soualiyou-ngah</a>
+      </div>
+      <div class="contact-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        <a href="https://github.com/Papyrus523" target="_blank">github.com/Papyrus523</a>
+      </div>
+
+      <div style="margin-top:1.5rem; padding:1.2rem 1.4rem; background:var(--tag-bg); border-radius:12px; border:1px solid #c7d7fe;">
+        <div style="font-size:0.78rem; font-weight:700; color:var(--accent); margin-bottom:0.35rem;">Work-study availability</div>
+        <div style="font-size:0.83rem; color:var(--ink); line-height:1.6;">Schedule: 2 weeks company / 2 weeks school<br>Duration: 24 months, starting September 2026</div>
+      </div>
+    </div>
+
+    <form class="contact-form" action="https://formspree.io/f/mbdqjrlo" method="POST">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="nom" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" name="sujet" placeholder="Work-study proposal, collaboration...">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea rows="5" name="message" placeholder="Describe your project or opportunity..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:fit-content;">
+        Send message
+      </button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Soualiyou NGAH &mdash; Data Analyst &amp; Data Scientist &mdash; Paris, France
+</footer>
+
+<script>
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+
+  var skillObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-fill').forEach(function(bar) {
+          var w = bar.getAttribute('data-width');
+          bar.style.width = '0';
+          setTimeout(function() { bar.style.width = w; }, 150);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-group').forEach(function(el) { skillObserver.observe(el); });
+</script>
+
+</body>
+</html>
